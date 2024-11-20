@@ -119,7 +119,7 @@ async function initVersion(){
 
   newVersionNumber = "1.0.0"
   const askVersionName = await input({ message: "Type a version name if not the default format 1.0.0"})
-  newVersionName = `v.${askVersionName}.1.0.0`
+  newVersionName = `v${askVersionName === "" ? "" : `.${askVersionName}`}.1.0.0`
 
   return {
     name: newVersionName,
@@ -161,7 +161,6 @@ function updatePackageJson(versionNumber){
   const packageJsonPath = path.resolve(__dirname, '../package.json');
   const packageJsonContent = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
 
-  console.log(versionNumber)
   // Update the version in package.json
   packageJsonContent.version = versionNumber;
 
