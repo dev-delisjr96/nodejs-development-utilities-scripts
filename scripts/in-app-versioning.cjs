@@ -161,6 +161,7 @@ function updatePackageJson(versionNumber){
   const packageJsonPath = path.resolve(__dirname, '../package.json');
   const packageJsonContent = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
 
+  console.log(versionNumber)
   // Update the version in package.json
   packageJsonContent.version = versionNumber;
 
