@@ -158,7 +158,7 @@ function updateVersionJsonFile(filePath, versionName){
  */
 function updatePackageJson(versionNumber){
   // Update the version in package.json with the git tag
-  const packageJsonPath = path.resolve(__dirname, 'package.json');
+  const packageJsonPath = path.resolve(__dirname, '../package.json');
   const packageJsonContent = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
 
   // Update the version in package.json
@@ -233,7 +233,9 @@ async function updateVersionInJson(filePath) {
     if (tag) {
       const { name, number } = await setVersion(tag)
       try {
-        updateVersionJsonFile(filePath, name)
+        if(filePath){
+          updateVersionJsonFile(filePath, name)
+        }
         updatePackageJson(number)
         pushNewVersion(name)
       } catch (error) {
@@ -244,4 +246,4 @@ async function updateVersionInJson(filePath) {
 }
   
 // Esempio di utilizzo
-updateVersionInJson('../src/version.json');
+updateVersionInJson();
